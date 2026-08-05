@@ -40,8 +40,10 @@ def shortestPath(edges, n, src):
 
         w1, n1 = heapq.heappop(heap)
 
-        if n1 not in res:
-            res[n1] = w1
+        if n1 in res:
+            continue
+
+        res[n1] = w1
 
         for n2, w2 in adjList[n1]:
 
