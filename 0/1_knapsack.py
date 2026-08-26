@@ -27,12 +27,13 @@ def max_profit(profits, weights, capacity) -> int:
         if i >= len(profits):
             return profit
 
-        res_choosing = 0
+        res_choosing = 0 #default value if the first branch never executed in our recursive call
 
-        #choose the value at i
+        #choose the value at i if we have enough capacity
         if cap - weights[i] >= 0:
             res_choosing = recurse(i+1, profit + profits[i], cap - weights[i])
 
+        #dont choose value at i
         res_not_choosing = recurse(i+1, profit, cap)
     
         return max(res_choosing, res_not_choosing)
