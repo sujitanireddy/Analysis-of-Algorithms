@@ -20,7 +20,9 @@ base cases:
 """
 
 #Brute Force
-def max_profit(profits, weights, capacity) -> int:
+#TC : O(2 ** n)
+#SC : O(n)
+def max_profit_brute_force(profits, weights, capacity) -> int:
 
     def recurse(i, profit, cap):
 
@@ -39,5 +41,34 @@ def max_profit(profits, weights, capacity) -> int:
         return max(res_choosing, res_not_choosing)
 
     return recurse(0,0,capacity)
+
+#print(max_profit_brute_force(profits=[4,4,7,1], weights=[5,2,3,1], capacity = 8))
+
+
+#Top Down Memoization 
+#TC : O(n * m) 
+#SC : O(n)
+def max_profit(profits, weights, capacity) -> int:
+
+    cache = {}
+
+    def recurse(i, cap):
+
+        if i == len(profits):
+            return 0
+
+        if (i,cap) in cache:
+            return cache[(i, cap)]
+
+        cache[(i,cap)] = recurse(i+1,cap)
+
+        if cap - weights[i] >= 0:
+            p = profits[i] + recurse(i+1, cap - weights[i])
+            cache[(i,cap)] = max(p, cache[(i,cap)])
+
+        return cache[(i,cap)]
+
+    return recurse(0,capacity)
+
 
 print(max_profit(profits=[4,4,7,1], weights=[5,2,3,1], capacity = 8))
