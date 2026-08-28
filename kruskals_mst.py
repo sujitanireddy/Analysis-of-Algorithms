@@ -54,7 +54,6 @@ TC: O(ElogV)
 # return a list edges making up the minimum spanning tree. edges = (src,des,weight)
 
 import heapq
-import 
 
 def minimum_spanning_tree(edges, n):
 
