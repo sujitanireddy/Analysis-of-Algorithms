@@ -101,10 +101,14 @@ def bottom_up(profits, weights, capacity):
     COLS = capacity + 1 #capacity ranging from 0 - capacity
     matrix = [[0] * COLS for i in range(ROWS)]
 
+    print(matrix)
+
     #initialize the first column
     for c in range(COLS):
         if c >= weights[0]:
             matrix[0][c] = profits[0]
+
+    print(matrix)
 
     #Dp logic
     for r in range(1, ROWS):
@@ -120,6 +124,8 @@ def bottom_up(profits, weights, capacity):
             matrix[r][c] = max(skip, include)
 
     return matrix[ROWS-1][COLS-1]
+
+print(bottom_up(profits=[2,4,7,3], weights=[4,3,7,1], capacity = 8))
 
 
 #Bottom Up: DP solution with space optimization. Using only two array's through out instead of the whole matrix.
@@ -154,7 +160,7 @@ def bottom_up_space_optimized(profits, weights, capacity):
 
     return matrix[1][COLS-1]
 
-print(bottom_up_space_optimized(profits=[4,4,7,1], weights=[5,2,3,1], capacity = 8))
+#print(bottom_up_space_optimized(profits=[4,4,7,1], weights=[5,2,3,1], capacity = 8))
 
 
 """
